@@ -6,20 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latin Pack</title>
     <link rel="stylesheet" href="stylesp.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-        integrity="sha384-DfzSICsrKGvl5r06N7LWS2yStX9n0tBfQxPrJGjKZvIddpW1r1TvJDYzHYE9vXK/" crossorigin="anonymous">
 
-        <script>
-            function actualizarCategoriaActual() {
-              var categoriaActual = document.querySelector("section:target h2").textContent; // obtenemos el título de la sección actual
-              document.getElementById("categoria-actual").textContent = categoriaActual; // actualizamos el contenido del elemento donde se muestra la categoría actual
-            }
-        
-            // llamamos a la función actualizarCategoriaActual cada vez que se cambie la sección actual
-            window.addEventListener("hashchange", actualizarCategoriaActual);
-            actualizarCategoriaActual(); // llamamos a la función al cargar la página para mostrar la categoría actual por defecto
-          </script>
-  
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <script>
+        function actualizarCategoriaActual() {
+            var categoriaActual = document.querySelector("section:target h2").textContent; // obtenemos el título de la sección actual
+            document.getElementById("categoria-actual").textContent = categoriaActual; // actualizamos el contenido del elemento donde se muestra la categoría actual
+        }
+
+        // llamamos a la función actualizarCategoriaActual cada vez que se cambie la sección actual
+        window.addEventListener("hashchange", actualizarCategoriaActual);
+        actualizarCategoriaActual(); // llamamos a la función al cargar la página para mostrar la categoría actual por defecto
+    </script>
+
 
 
 
@@ -41,8 +44,11 @@
                     <li><a href="#categoria6">Categoría 6</a></li>
                 </ul>
             </li>
-             </ul>
-        <ul><li id="categoria-actual"  style="color: rgb(4, 232, 30);"></li> <!-- aquí agregamos el elemento donde se mostrará la categoría actual --></ul>
+        </ul>
+        <ul>
+            <li id="categoria-actual" style="color: rgb(4, 232, 30);"></li>
+            <!-- aquí agregamos el elemento donde se mostrará la categoría actual -->
+        </ul>
     </nav>
 
     <section>
@@ -180,30 +186,30 @@
 
         });
 
-    
+
         // Obtener el elemento de la categoría actual
-var categoriaActual = document.getElementById("categoria-actual");
+        var categoriaActual = document.getElementById("categoria-actual");
 
-// Obtener las secciones de la página
-var secciones = document.querySelectorAll("section");
+        // Obtener las secciones de la página
+        var secciones = document.querySelectorAll("section");
 
-// Agregar un controlador de eventos para el desplazamiento de la página
-window.addEventListener("scroll", function() {
-  // Obtener la posición actual de desplazamiento
-  var posicion = window.pageYOffset || document.documentElement.scrollTop;
+        // Agregar un controlador de eventos para el desplazamiento de la página
+        window.addEventListener("scroll", function () {
+            // Obtener la posición actual de desplazamiento
+            var posicion = window.pageYOffset || document.documentElement.scrollTop;
 
-  // Buscar la sección que está en la parte superior de la pantalla
-  for (var i = 0; i < secciones.length; i++) {
-    var seccion = secciones[i];
-    var seccionArriba = seccion.offsetTop - 50;
-    var seccionAbajo = seccionArriba + seccion.offsetHeight;
+            // Buscar la sección que está en la parte superior de la pantalla
+            for (var i = 0; i < secciones.length; i++) {
+                var seccion = secciones[i];
+                var seccionArriba = seccion.offsetTop - 50;
+                var seccionAbajo = seccionArriba + seccion.offsetHeight;
 
-    if (posicion >= seccionArriba && posicion < seccionAbajo) {
-      // Actualizar el elemento de la categoría actual con el nombre de la sección
-      categoriaActual.innerHTML = seccion.id;
-    }
-  }
-});
+                if (posicion >= seccionArriba && posicion < seccionAbajo) {
+                    // Actualizar el elemento de la categoría actual con el nombre de la sección
+                    categoriaActual.innerHTML = seccion.id;
+                }
+            }
+        });
 
 
 
