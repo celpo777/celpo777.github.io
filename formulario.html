@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang=”en”>
+<head>
+    <meta charset=”UTF-8″ />
+    <title>Document</title>
+</head>
+<body> 
+
+
+    <form>
+        <label for="producto">Seleccione el producto:</label>
+        <select id="producto" name="producto" onchange="mostrarSubproductos()">
+          <option value="">Seleccione...</option>
+          <option value="cajas">Cajas</option>
+          <option value="laminas">Láminas</option>
+          <option value="rollos">Rollos</option>
+          
+        </select>
+        <br>
+        <div id="subproductos"></div>
+        <br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <br>
+        <button type="button" onclick="enviarWhatsapp()">Enviar por Whatsapp</button>
+      </form>
+      
+      <script>
+        
+        const mensajes = {
+  cajas: {
+    label: "Seleccione la caja:",
+    options: [
+      { value: "caja1", label: "Caja 1" },
+      { value: "caja2", label: "Caja 2" },
+      { value: "caja3", label: "Caja 3" },
+    ],
+  },
+  laminas: {
+    label: "Seleccione la lámina:",
+    options: [
+      { value: "lamina1", label: "Lámina 1" },
+      { value: "lamina2", label: "Lámina 2" },
+      { value: "lamina3", label: "Lámina 3" },
+    ],
+  },
+  rollos: {
+    label: "Seleccione el rollo:",
+    options: [
+      { value: "rollo1", label: "Rollo 1" },
+      { value: "rollo2", label: "Rollo 2" },
+      { value: "rollo3", label: "Rollo 3" },
+    ],
+  },
+};
+      
+        function mostrarSubproductos() {
+          const producto = document.getElementById("producto").value;
+          const { label, options } = mensajes[producto] || {};
+          const subproductos = options
+            ? `
+              <label for="${producto}">${label}</label>
+              <select id="${producto}" name="${producto}">
+                <option value="">Seleccione...</option>
+                ${options
+                  .map(({ value, label }) => `<option value="${value}">${label}</option>`)
+                  .join("")}
+              </select>
+            `
+            : "";
+          document.getElementById("subproductos").innerHTML = subproductos;
+        }
+      
+        function enviarWhatsapp() {
+          const nombre = document.getElementById("nombre").value;
+          const producto = document.getElementById("producto").value;
+          const subproducto = document.getElementById(producto)?.value;
+          if (!producto || !subproducto) {
+            return;
+          }
+          const mensaje = `Hola, mi nombre es ${nombre}. Estoy interesado en el producto ${producto} - ${subproducto}.`;
+          const url = `https://api.whatsapp.com/send/?phone=573178551990&text=${encodeURIComponent(mensaje)}`;
+          window.open(url);
+        }
+        
+        
+      </script>
+    
+</body>
+</html>
+
